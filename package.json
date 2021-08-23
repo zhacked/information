@@ -12,10 +12,12 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "admin-lte": "^3.0.0-alpha.2",
+    "vform": "^2.1.1",
+    "vue-router": "^3.5.2",
     "vuetify": "^2.5.8"
   },
   "devDependencies": {
-    "axios": "^0.21",
+    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "browser-sync": "^2.27.5",
     "browser-sync-webpack-plugin": "^2.3.0",
