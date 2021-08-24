@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "admin-lte": "^3.0.0-alpha.2",
+    "admin-lte": "^3.1.0",
+    "sweetalert2": "^11.1.4",
     "vform": "^2.1.1",
+    "vue-progressbar": "^0.7.5",
     "vue-router": "^3.5.2",
     "vuetify": "^2.5.8"
   },
@@ -27,7 +29,7 @@
     "popper.js": "^1.16.1",
     "postcss": "^8.1.14",
     "resolve-url-loader": "^3.1.2",
-    "sass": "^1.32.11",
+    "sass": "^1.38.1",
     "sass-loader": "^11.0.1",
     "vue": "^2.6.12",
     "vue-cli-plugin-vuetify": "^2.4.2",

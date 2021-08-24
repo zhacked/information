@@ -4,6 +4,11 @@
         <h1>
             management
         </h1>
+        <v-app>
+                <v-container>
+                        <v-btn>click me </v-btn>
+                </v-container>
+        </v-app>
     </div>
 </template>
 <script>
