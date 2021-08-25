@@ -11,6 +11,8 @@ import {
     AlertErrors,
     AlertSuccess
   } from 'vform/src/components/bootstrap5'
+import Gate from './gate';
+
 
 import VueRouter from 'vue-router'
 import swal from 'sweetalert2'
@@ -32,6 +34,7 @@ Vue.filter('upText', function(text){
 Vue.filter('myDate',function(created){
     return moment(created).format('MMMM Do YYYY');
 });
+Vue.prototype.$gate = new Gate(window.user)
 
 Vue.use(VueRouter)
 
@@ -49,11 +52,19 @@ window.Fire =  new Vue();
 
 
 window.toast = toast;
+
+Vue.component(
+    'not-found',
+    require('./components/NotFound.vue')
+);
+
 Vue.component(Button.name, Button)
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 Vue.component(AlertErrors.name, AlertErrors)
 Vue.component(AlertSuccess.name, AlertSuccess)
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 
 let routes = [
     {
@@ -64,6 +75,9 @@ let routes = [
     },
     {
         path: '/profile', component: require('./components/Profile.vue').default
+    },
+    {
+        path: '*', component: require('./components/NotFound.vue').default
     },
 ]
 
@@ -78,5 +92,17 @@ const router = new VueRouter({
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data:{
+        search: ''
+    },
+    methods:{
+        searchit: _.debounce(() => {
+            Fire.$emit('searching');
+        },1000)
+
+        // printme() {
+        //     window.print();
+        // }
+    }
 });

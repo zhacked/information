@@ -1,6 +1,6 @@
 <template >
 	<div class="container">
-		<div class="row mt-5">
+		<div class="row mt-5" v-if="$gate.isAdmin()">
             <div class="col-md-12">
                 <div class="card card-default">
                     <div class="card-header">
@@ -22,8 +22,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="user in users.data" :key="user.id">
-
+                                <tr v-if="users.data.length == 0">
+                                    <td colspan="7" class="text-center"> <h3>No Data Available</h3> </td>
+                                </tr>
+								<tr v-else v-for="user in users.data" :key="user.id">
 									<td>{{user.id}}</td>
 									<td>{{user.name}}</td>
 									<td>{{user.email}}</td>
@@ -45,7 +47,8 @@
                     </div>
 
                     <div class="card-footer">
-                        <!-- <pagination :data="users" @pagination-change-page="getResults"></pagination> -->
+
+                        <pagination class="float-right" :data="users" @pagination-change-page="getResults"></pagination>
                     </div>
                 </div>
             </div>
@@ -124,6 +127,7 @@
             return {
                 editmode: false,
                 users : {},
+                length: '',
                 form: new Form({
                     id:'',
                     name : '',
@@ -181,7 +185,6 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
-                        // Send request to the server
                          if (result.value) {
                                 this.form.delete('api/user/'+id).then(()=>{
                                         swal.fire(
@@ -197,10 +200,9 @@
                     })
             },
             loadUsers(){
-                axios.get("api/user").then(({ data }) => (this.users = data));
-                // if(this.$gate.isAdminOrAuthor()){
-                //     axios.get("api/user").then(({ data }) => (this.users = data));
-                // }
+                if(this.$gate.isAdmin()){
+                    axios.get("api/user").then(({ data }) => (this.users = data));
+                }
             },
             createUser(){
                 this.$Progress.start();
@@ -232,7 +234,6 @@
            Fire.$on('AfterCreate',() => {
                this.loadUsers();
            });
-        //    setInterval(() => this.loadUsers(), 3000);
         }
     }
 </script>

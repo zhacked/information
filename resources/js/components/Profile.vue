@@ -16,13 +16,13 @@
         <div class="row">
             <div class="col-md-12 mt-3">
                 <div class="card card-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header text-white" style="background-image:url('./image/user-cover.jpg')">
-                    <h3 class="widget-user-username">{{this.form.name}}</h3>
+                <div class="widget-user-header text-pink" style="background-image:url('./image/user-cover.jpg')">
+                    <h1 class="widget-user-username ">{{this.form.name}}</h1>
                     <h5 class="widget-user-desc">{{this.form.type}}</h5>
                 </div>
+
                 <div class="widget-user-image">
-                    <img class="img-circle" :src="getProfilePhoto() != null ? getProfilePhoto() : 'image/profile.png'" alt="User Avatar">
+                       <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
                 </div>
                 <div class="card-footer">
                     <div class="row">
@@ -31,32 +31,25 @@
                         <h5 class="description-header">3,200</h5>
                         <span class="description-text">SALES</span>
                         </div>
-                        <!-- /.description-block -->
                     </div>
-                    <!-- /.col -->
                     <div class="col-sm-4 border-right">
                         <div class="description-block">
                         <h5 class="description-header">13,000</h5>
                         <span class="description-text">FOLLOWERS</span>
                         </div>
-                        <!-- /.description-block -->
                     </div>
-                    <!-- /.col -->
                     <div class="col-sm-4">
                         <div class="description-block">
                         <h5 class="description-header">35</h5>
                         <span class="description-text">PRODUCTS</span>
                         </div>
-                        <!-- /.description-block -->
                     </div>
-                    <!-- /.col -->
                     </div>
-                    <!-- /.row -->
                 </div>
                 </div>
             </div>
 
-            <!-- tab -->
+
 
             <div class="col-md-12">
                 <div class="card">
@@ -65,14 +58,14 @@
                         <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Activity</a></li>
                         <li class="nav-item"><a class="nav-link active show" href="#settings" data-toggle="tab">Settings</a></li>
                         </ul>
-                    </div><!-- /.card-header -->
+                    </div>
                     <div class="card-body">
                         <div class="tab-content">
-                            <!-- Activity Tab -->
+
                             <div class="tab-pane" id="activity">
-                                <h3 class="text-center">Display User Activity</h3>
+                                <h3 class="text-center">Display User Activity   </h3>
                             </div>
-                            <!-- Setting Tab -->
+
                             <div class="tab-pane active show" id="settings">
                                 <form class="form-horizontal">
                                 <div class="form-group">
@@ -109,7 +102,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password" class="col-sm-12 control-label">Passport (leave empty if not changing)</label>
+                                    <label for="password" class="col-sm-12 control-label">Change Password (leave empty if not changing)</label>
 
                                     <div class="col-sm-12">
                                     <input type="password"
@@ -130,14 +123,10 @@
                                 </div>
                                 </form>
                             </div>
-                        <!-- /.tab-pane -->
                         </div>
-                        <!-- /.tab-content -->
-                    </div><!-- /.card-body -->
+                    </div>
                 </div>
-                <!-- /.nav-tabs-custom -->
           </div>
-          <!-- end tabs -->
         </div>
     </div>
 </template>
@@ -159,13 +148,11 @@
                 })
             }
         },
-        mounted() {
-            console.log('Component mounted.')
-        },
         methods:{
             getProfilePhoto(){
-                let photo = this.form.photo == null ? "image/profile.png/" : ((this.form.photo.length > 200) ? this.form.photo : "image/profile/"+ this.form.photo);
+                let photo = (this.form.photo.length > 200) ? this.form.photo : "image/profile/"+ this.form.photo ;
                 return photo;
+
 
             },
             updateInfo(){
@@ -175,8 +162,9 @@
                     this.form.password = undefined;
                 }
                 this.form.put('api/profile')
-                .then(()=>{
-                     Fire.$emit('AfterCreate');
+                .then(({data})=>{
+
+                    Fire.$emit('AfterCreate');
                     this.$Progress.finish();
                 })
                 .catch(() => {
@@ -189,7 +177,7 @@
                 let limit = 1024 * 1024 * 2;
 
                 if(file['size'] > limit){
-                    swal({
+                    swal.fire({
                         type: 'error',
                         title: 'Oops...',
                         text: 'You are uploading a large file',
@@ -205,8 +193,7 @@
         created() {
             axios.get("api/profile")
             .then(({ data }) => (
-                this.form.fill(data)
-                )
+                this.form.fill(data))
             );
         }
     }
