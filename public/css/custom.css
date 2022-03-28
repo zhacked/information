@@ -9,8 +9,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: #0047ff;
-  background: linear-gradient(315deg, #0047ff 0%, #0028b4 27%, #a00000 79%, red 100%);
+          background-color: #abe9cd;
+          background-image: linear-gradient(315deg, #abe9cd 0%, #3eadcf 74%);
+
 }
 
 .custom-card__glass {

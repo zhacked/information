@@ -24,5 +24,7 @@ Route::get('profile', [App\Http\Controllers\API\UserController::class, 'profile'
 Route::put('profile', [App\Http\Controllers\API\UserController::class, 'updateProfile'])->name('updateProfile');
 Route::get('findUser', [App\Http\Controllers\API\UserController::class, 'search']);
 
+Route::apiResources(['tasks' => App\Http\Controllers\TaskController::class]);
+
 
 

@@ -4,12 +4,12 @@
     <div class="custom-layout__login container-fluid">
         <div class="container">
             <div class="d-flex justify-content-center align-items-center flex-column">
-                <img src="{{ asset('image/rooster.png') }}" class="mb-5" width="160px" height="110px" alt="LOGO">
+
                 <div class="custom-card__glass d-flex justify-content-center align-items-center p-4 card"
                     style="max-width: 90%; width: 600px">
 
                     <div class="card-body container-fluid px-5 py-3">
-                        <h1 class="text-center text-white custom-welcome">WELCOME</h1>
+                        <h1 class="text-center text-white custom-welcome">Todo List</h1>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="mb-3">
